@@ -11,7 +11,7 @@ const Footer = () => {
           <p className="w-full md:w-2/3 text-gray-600 leading-6">
             Your trusted healthcare partner. We make it easier to find
             top-rated doctors, schedule appointments, and access expert medical
-            advice.
+            advice through AI chatbot.
           </p>
         </div>
 
@@ -32,7 +32,7 @@ const Footer = () => {
           <ul className="flex flex-col gap-2 text-gray-600">
             <li>
               <a href="tel:+12345677890" className="hover:text-green-600 transition">
-                +1-234-567-7890
+                +91-6968653423
               </a>
             </li>
             <li>

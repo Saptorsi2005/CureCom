@@ -17,8 +17,8 @@ const Contact = () => {
                 {/* Contact Details */}
                 <div className='flex flex-col justify-center items-start gap-6 md:max-w-lg'>
                     <p className='font-semibold text-lg text-gray-600'>OUR OFFICE</p>
-                    <p className='text-gray-500'>50392 Williams Station <br /> Suite 670, Washington, USA</p>
-                    <p className='text-gray-500'>Tel: 123-345-6789 <br /> Email: care@curecomgmail.com</p>
+                    <p className='text-gray-500'>56/2, Raja Dinendra Street, Maniktala <br /> Kolkata, West Bengal, 700006, India</p>
+                    <p className='text-gray-500'>Tel: +91-6968653423 <br /> Email: care@curecom.com</p>
                     
                     <p className='font-semibold text-lg text-gray-600'>Career at CureCom</p>
                     <p className='text-gray-500'>Learn more about us</p>
