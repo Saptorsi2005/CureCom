@@ -89,10 +89,12 @@ const Login = () => {
                          
                     )}
                 </p>
-                <p>
+                {state === "Sign Up" && (
+                    <p>
                     Login as a Doctor ? <span onClick={() => setState('Login')} 
                                 className='text-green-500 underline cursor-pointer'> Click Here </span>
                 </p>
+                )}
             </div>
         </form>
     )

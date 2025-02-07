@@ -172,7 +172,7 @@ export const doctors = [
     },
     {
         _id: 'doc7',
-        name: 'Dr. Charles Oliveira',
+        name: 'Dr. Charles oliviera',
         image: doc7,
         speciality: 'General physician',
         degree: 'MBBS',

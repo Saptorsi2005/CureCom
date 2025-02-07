@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import { assets } from "../assets/assets";
 import RelatedDoctors from "../components/RelatedDoctors";
+import { PopupButton } from "react-calendly";
 
 const Appointment = () => {
   const { docId } = useParams();
@@ -77,7 +78,7 @@ const Appointment = () => {
         </div>
 
         {/* Booking Slots */}
-        <div className="mt-6 font-medium text-gray-700">
+        {/* <div className="mt-6 font-medium text-gray-700">
           <p>Booking Slots</p>
 
           <div className="flex gap-3 overflow-x-auto mt-4">
@@ -118,7 +119,19 @@ const Appointment = () => {
           >
             {slotTime ? "Book An Appointment" : "Select a Slot"}
           </button>
+        </div> */}
+        <div className="App">
+          <PopupButton className="mt-6 px-14 py-3 rounded-full text-white bg-green-500 hover:bg-green-700"
+            url="https://calendly.com/curecom"
+            /*
+             * react-calendly uses React's Portal feature (https://reactjs.org/docs/portals.html) to render the popup modal. As a result, you'll need to
+             * specify the rootElement property to ensure that the modal is inserted into the correct domNode.
+             */
+            rootElement={document.getElementById("root")}
+            text="Click here to schedule!"
+          />
         </div>
+
 
         {/* Related Doctors */}
         <RelatedDoctors docId={docId} speciality={docInfo.speciality} />
