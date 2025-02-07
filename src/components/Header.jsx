@@ -1,9 +1,8 @@
 import React from "react";
 import { assets } from "../assets/assets";
-
 const Header = () => {
   return (
-    <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center justify-between bg-blue-600 rounded-xl px-6 sm:px-10 lg:px-20 py-12 text-white">
+    <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row items-center justify-between bg-green-500 rounded-xl px-6 sm:px-10 lg:px-20 py-12 text-white">
       {/* Left Side */}
       <div className="md:w-1/2 flex flex-col gap-5 text-center md:text-left">
         <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold leading-tight">

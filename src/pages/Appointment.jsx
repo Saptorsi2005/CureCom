@@ -57,7 +57,7 @@ const Appointment = () => {
       <div className="px-4 md:px-10">
         {/* Doctor Details */}
         <div className="flex flex-col sm:flex-row gap-4">
-          <img className="bg-primary w-full sm:max-w-72 rounded-lg shadow-md" src={docInfo.image} alt={docInfo.name} />
+          <img className="bg-green-200 w-full sm:max-w-72 rounded-lg shadow-md" src={docInfo.image} alt={docInfo.name} />
           <div className="flex-1 border border-gray-300 rounded-lg p-6 bg-white">
             <p className="flex items-center gap-2 text-2xl font-medium text-gray-900">
               {docInfo.name} <img className="w-5" src={assets.verified_icon} alt="Verified" />
@@ -86,7 +86,7 @@ const Appointment = () => {
                 key={index}
                 onClick={() => setSlotIndex(index)}
                 className={`text-center py-6 min-w-16 rounded-full cursor-pointer transition-all duration-300 ${
-                  slotIndex === index ? "bg-blue-500 text-white" : "border border-gray-300 hover:bg-gray-100"
+                  slotIndex === index ? "bg-green-600 text-white" : "border border-gray-300 hover:bg-gray-100"
                 }`}
               >
                 <p>{item[0] && daysOfWeek[item[0].datetime.getDay()]}</p>
@@ -102,7 +102,7 @@ const Appointment = () => {
                   key={index}
                   onClick={() => setSlotTime(item.time)}
                   className={`px-5 py-2 rounded-full cursor-pointer transition-all duration-300 ${
-                    item.time === slotTime ? "bg-blue-500 text-white" : "border border-gray-300 text-gray-400 hover:bg-gray-100"
+                    item.time === slotTime ? "bg-green-600 text-white" : "border border-gray-300 text-gray-400 hover:bg-gray-100"
                   }`}
                 >
                   {item.time}
@@ -113,7 +113,7 @@ const Appointment = () => {
           <button
             disabled={!slotTime}
             className={`mt-6 px-14 py-3 rounded-full text-white ${
-              slotTime ? "bg-blue-500 hover:bg-blue-600" : "bg-gray-300 cursor-not-allowed"
+              slotTime ? "bg-green-500 hover:bg-green-700" : "bg-gray-300 cursor-not-allowed"
             }`}
           >
             {slotTime ? "Book An Appointment" : "Select a Slot"}

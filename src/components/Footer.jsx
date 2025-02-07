@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="flex flex-col sm:grid grid-cols-[3fr_1fr_1fr] gap-14 my-10 mt-40 text-sm">
         {/* Left Section */}
         <div>
-          <img className="mb-5 w-40" src={assets.logo} alt="Prescripto Logo" />
+          <img className="mb-5 w-40" src={"/cchome.svg"} alt="CureCom Logo" />
           <p className="w-full md:w-2/3 text-gray-600 leading-6">
             Your trusted healthcare partner. We make it easier to find
             top-rated doctors, schedule appointments, and access expert medical
@@ -19,10 +19,10 @@ const Footer = () => {
         <div>
           <p className="text-xl font-semibold mb-5 text-gray-900">COMPANY</p>
           <ul className="flex flex-col gap-2 text-gray-600">
-            <li className="hover:text-blue-600 cursor-pointer transition">Home</li>
-            <li className="hover:text-blue-600 cursor-pointer transition">About Us</li>
-            <li className="hover:text-blue-600 cursor-pointer transition">Contact Us</li>
-            <li className="hover:text-blue-600 cursor-pointer transition">Privacy Policy</li>
+            <li className="hover:text-green-600 cursor-pointer transition">Home</li>
+            <li className="hover:text-green-600 cursor-pointer transition">About Us</li>
+            <li className="hover:text-green-600 cursor-pointer transition">Contact Us</li>
+            <li className="hover:text-green-600 cursor-pointer transition">Privacy Policy</li>
           </ul>
         </div>
 
@@ -31,13 +31,13 @@ const Footer = () => {
           <p className="text-xl font-semibold mb-5 text-gray-900">GET IN TOUCH</p>
           <ul className="flex flex-col gap-2 text-gray-600">
             <li>
-              <a href="tel:+12345677890" className="hover:text-blue-600 transition">
+              <a href="tel:+12345677890" className="hover:text-green-600 transition">
                 +1-234-567-7890
               </a>
             </li>
             <li>
-              <a href="mailto:care@prescripto.com" className="hover:text-blue-600 transition">
-                care@prescripto.com
+              <a href="mailto:care@curecom.com" className="hover:text-green-600 transition">
+                care@curecom.com
               </a>
             </li>
           </ul>
@@ -48,7 +48,7 @@ const Footer = () => {
       <div>
         <hr />
         <p className="py-5 text-sm text-center text-gray-700">
-          &copy; 2025 Prescripto - All Rights Reserved
+          &copy; 2025 CureCom - All Rights Reserved
         </p>
       </div>
     </div>

@@ -58,7 +58,7 @@ const Login = () => {
                 </div>
                 
                 <button 
-                    className='bg-primary text-white w-full py-2 rounded-md text-base mt-4 hover:bg-primary-dark transition-all'
+                    className='bg-green-500 text-white w-full py-2 rounded-md text-base mt-4 hover:bg-primary-dark transition-all'
                     type="submit"
                     onClick={onSubmitHandler}
                 >
@@ -71,7 +71,7 @@ const Login = () => {
                             Already have an account? 
                             <span 
                                 onClick={() => setState('Login')} 
-                                className='text-primary underline cursor-pointer'
+                                className='text-green-500 underline cursor-pointer'
                             >
                                 Login here
                             </span>
@@ -81,12 +81,17 @@ const Login = () => {
                             Don't have an account? 
                             <span 
                                 onClick={() => setState('Sign Up')} 
-                                className='text-primary underline cursor-pointer'
+                                className='text-green-500 underline cursor-pointer'
                             >
                                 Sign up here
                             </span>
                         </>
+                         
                     )}
+                </p>
+                <p>
+                    Login as a Doctor ? <span onClick={() => setState('Login')} 
+                                className='text-green-500 underline cursor-pointer'> Click Here </span>
                 </p>
             </div>
         </form>

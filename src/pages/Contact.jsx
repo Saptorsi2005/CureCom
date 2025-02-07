@@ -20,7 +20,7 @@ const Contact = () => {
                     <p className='text-gray-500'>50392 Williams Station <br /> Suite 670, Washington, USA</p>
                     <p className='text-gray-500'>Tel: 123-345-6789 <br /> Email: care@curecomgmail.com</p>
                     
-                    <p className='font-semibold text-lg text-gray-600'>Career at Prescripto</p>
+                    <p className='font-semibold text-lg text-gray-600'>Career at CureCom</p>
                     <p className='text-gray-500'>Learn more about us</p>
                     
                     <button className='border border-black px-8 py-4 text-sm hover:bg-black hover:text-white transition-all duration-500 mt-4'>
