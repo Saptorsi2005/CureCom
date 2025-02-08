@@ -5,8 +5,13 @@ import { assets } from "../assets/assets";
 import RelatedDoctors from "../components/RelatedDoctors";
 import { PopupButton } from "react-calendly";
 import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
+import DoctorProfile from "../components/DoctorProfile";
 
 const Appointment = () => {
+  const [doctorId] = useState("doctor123"); // Example doctor ID
+  const [userId] = useState("user456"); // Example logged-in user ID
+
+
   const { docId } = useParams();
   const { doctors, currencySymbol } = useContext(AppContext);
 
@@ -146,6 +151,14 @@ const Appointment = () => {
           >
             Video Call
           </button>
+        </div>
+
+        <div>
+          <div className="p-6">
+            <h1 className="text-2xl font-bold">Doctor Review System</h1>
+            <DoctorProfile doctorId={doctorId} userId={userId} />
+          </div>
+
         </div>
 
         {/* Related Doctors */}
