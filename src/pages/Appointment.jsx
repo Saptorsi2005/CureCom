@@ -156,7 +156,7 @@ const Appointment = () => {
         <div>
           <div className="p-6">
             <h1 className="text-2xl font-bold">Doctor Review System</h1>
-            <DoctorProfile doctorId={doctorId} userId={userId} />
+            <DoctorProfile doctorId={docId} userId={userId} />
           </div>
 
         </div>
