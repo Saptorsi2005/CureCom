@@ -4,6 +4,7 @@ import { AppContext } from "../context/AppContext";
 import { assets } from "../assets/assets";
 import RelatedDoctors from "../components/RelatedDoctors";
 import { PopupButton } from "react-calendly";
+import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
 
 const Appointment = () => {
   const { docId } = useParams();
@@ -53,6 +54,58 @@ const Appointment = () => {
     return slots;
   }, [docInfo]);
 
+  // Generate room ID
+  const roomID = useMemo(() => getUrlParams().get("roomID") || randomID(5), []);
+
+  function myMeeting(element) {
+    const appID = 1119050860;
+    const serverSecret = "c6ed20e6310d6cfd250b41dcd93285bf";
+    const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, randomID(5), randomID(5));
+
+    const zp = ZegoUIKitPrebuilt.create(kitToken);
+    zp.joinRoom({
+      container: element,
+      sharedLinks: [
+        {
+          name: "Copy link",
+          url: window.location.protocol + "//" + window.location.host + window.location.pathname + "?roomID=" + roomID,
+        },
+      ],
+      scenario: {
+        mode: ZegoUIKitPrebuilt.OneoNoneCall,
+      },
+    });
+  }
+
+  function randomID(len = 5) {
+    let result = "";
+    const chars = "12345qwertyuiopasdfgh67890jklmnbvcxzMNBVCZXASDQWERTYHGFUIOLKJP";
+    const maxPos = chars.length;
+    for (let i = 0; i < len; i++) {
+      result += chars.charAt(Math.floor(Math.random() * maxPos));
+    }
+    return result;
+  }
+
+  function getUrlParams(url = window.location.href) {
+    let urlStr = url.split("?")[1];
+    return new URLSearchParams(urlStr);
+  }
+
+  const scrollToBottom = () => {
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+  };
+
+  function handleClick() {
+    const container = document.createElement("div");
+    container.className = "myCallContainer";
+    container.style.width = "100vw";
+    container.style.height = "100vh";
+    document.body.appendChild(container);
+    myMeeting(container);
+    scrollToBottom();
+  }
+
   return (
     docInfo && (
       <div className="px-4 md:px-10">
@@ -77,61 +130,23 @@ const Appointment = () => {
           </div>
         </div>
 
-        {/* Booking Slots */}
-        {/* <div className="mt-6 font-medium text-gray-700">
-          <p>Booking Slots</p>
-
-          <div className="flex gap-3 overflow-x-auto mt-4">
-            {docSlots.map((item, index) => (
-              <div
-                key={index}
-                onClick={() => setSlotIndex(index)}
-                className={`text-center py-6 min-w-16 rounded-full cursor-pointer transition-all duration-300 ${
-                  slotIndex === index ? "bg-green-600 text-white" : "border border-gray-300 hover:bg-gray-100"
-                }`}
-              >
-                <p>{item[0] && daysOfWeek[item[0].datetime.getDay()]}</p>
-                <p>{item[0] && item[0].datetime.getDate()}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="flex gap-3 overflow-x-auto mt-4">
-            {docSlots.length > 0 &&
-              docSlots[slotIndex]?.map((item, index) => (
-                <p
-                  key={index}
-                  onClick={() => setSlotTime(item.time)}
-                  className={`px-5 py-2 rounded-full cursor-pointer transition-all duration-300 ${
-                    item.time === slotTime ? "bg-green-600 text-white" : "border border-gray-300 text-gray-400 hover:bg-gray-100"
-                  }`}
-                >
-                  {item.time}
-                </p>
-              ))}
-          </div>
-
-          <button
-            disabled={!slotTime}
-            className={`mt-6 px-14 py-3 rounded-full text-white ${
-              slotTime ? "bg-green-500 hover:bg-green-700" : "bg-gray-300 cursor-not-allowed"
-            }`}
-          >
-            {slotTime ? "Book An Appointment" : "Select a Slot"}
-          </button>
-        </div> */}
+        {/* Calendly Scheduling */}
         <div className="App">
-          <PopupButton className="mt-6 px-14 py-3 rounded-full text-white bg-green-500 hover:bg-green-700"
+          <PopupButton
+            className="mt-6 px-14 py-3 rounded-full text-white bg-green-500 hover:bg-green-700"
             url="https://calendly.com/curecom"
-            /*
-             * react-calendly uses React's Portal feature (https://reactjs.org/docs/portals.html) to render the popup modal. As a result, you'll need to
-             * specify the rootElement property to ensure that the modal is inserted into the correct domNode.
-             */
             rootElement={document.getElementById("root")}
             text="Click here to schedule!"
           />
         </div>
 
+        {/* Video Call Button */}
+        <div>
+          <button className="mt-6 px-14 py-3 rounded-full text-white bg-green-500 hover:bg-green-700" onClick={handleClick}
+          >
+            Video Call
+          </button>
+        </div>
 
         {/* Related Doctors */}
         <RelatedDoctors docId={docId} speciality={docInfo.speciality} />
