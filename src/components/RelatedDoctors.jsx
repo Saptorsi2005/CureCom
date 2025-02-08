@@ -57,7 +57,7 @@ const RelatedDoctors = ({ speciality, docId }) => {
           navigate("/doctors");
           scrollTo(0, 0);
         }}
-        className="bg-blue-600 text-white px-12 py-3 rounded-full mt-10 hover:bg-blue-700 transition-all duration-300 shadow-md"
+        className="bg-green-600 text-white px-12 py-3 rounded-full mt-10 hover:bg-green-700 transition-all duration-300 shadow-md"
       >
         View More
       </button>

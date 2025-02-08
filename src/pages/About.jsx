@@ -18,7 +18,7 @@ const About = () => {
         {/* About Content */}
         <div className="flex flex-col justify-center gap-6 md:w-2/4 text-sm text-gray-700">
           <p>
-            Welcome to CureCom, your trusted healthcare platform. Our mission is to connect you with top-rated doctors and seamless online appointment scheduling, ensuring easy access to quality healthcare.
+            Welcome to CureCom, your trusted healthcare platform. Our mission is to connect you with top-rated doctors and seamless online appointment scheduling, chat, audio and video calls with doctors, ensuring easy access to quality healthcare.
           </p>
           <p>
             Whether you're looking for specialized care or need a routine consultation, we provide a user-friendly, efficient, and personalized experience to cater to your needs.
