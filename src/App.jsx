@@ -12,12 +12,33 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import Dashboard from './doctorPages/Dashboard'
 import AllAppointments from './doctorPages/AllAppointments'
+import { useEffect } from 'react'
 
 const App = () => {
+
+  useEffect(() => {
+    window.googleTranslateElementInit = () => {
+      new window.google.translate.TranslateElement(
+        {
+          pageLanguage: "en",
+          includedLanguages: "en,es,fr,de,zh",
+          layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
+        },
+        "google_translate_element"
+      );
+    };
+
+    const script = document.createElement("script"); 
+    script.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
+
   
   return (
     <div>
       <Navbar/>
+      <div id="google_translate_element"></div>
       <Routes>
         <Route path='/' element={<Home/>}/>
         <Route path='/doctor' element={<Doctors/>}/>
