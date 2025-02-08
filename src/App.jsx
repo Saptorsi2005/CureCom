@@ -14,60 +14,63 @@ import Dashboard from './doctorPages/Dashboard'
 import AllAppointments from './doctorPages/AllAppointments'
 import { useEffect } from 'react'
 import { ZegoUIKitPrebuilt } from '@zegocloud/zego-uikit-prebuilt';
+import Sidebar from './DoctorComponent/Sidebar'
+import AddDoctor from './doctorPages/AddDoctor'
+import DoctorList from './doctorPages/DoctorList'
 
 
-function randomID(len) {
-  let result = '';
-  if (result) return result;
-  var chars = '12345qwertyuiopasdfgh67890jklmnbvcxzMNBVCZXASDQWERTYHGFUIOLKJP',
-    maxPos = chars.length,
-    i;
-  len = len || 5;
-  for (i = 0; i < len; i++) {
-    result += chars.charAt(Math.floor(Math.random() * maxPos));
-  }
-  return result;
-}
+// function randomID(len) {
+//   let result = '';
+//   if (result) return result;
+//   var chars = '12345qwertyuiopasdfgh67890jklmnbvcxzMNBVCZXASDQWERTYHGFUIOLKJP',
+//     maxPos = chars.length,
+//     i;
+//   len = len || 5;
+//   for (i = 0; i < len; i++) {
+//     result += chars.charAt(Math.floor(Math.random() * maxPos));
+//   }
+//   return result;
+// }
 
-export function getUrlParams(
-  url = window.location.href
-) {
-  let urlStr = url.split('?')[1];
-  return new URLSearchParams(urlStr);
-}
+// export function getUrlParams(
+//   url = window.location.href
+// ) {
+//   let urlStr = url.split('?')[1];
+//   return new URLSearchParams(urlStr);
+// }
 
 const App = () => {
 
-  const roomID = getUrlParams().get('roomID') || randomID(5);
-      let myMeeting = async (element) => {
-     // generate Kit Token
-      const appID = 1119050860;
-      const serverSecret = "c6ed20e6310d6cfd250b41dcd93285bf";
-      const kitToken =  ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID,  randomID(5),  randomID(5));
+  // const roomID = getUrlParams().get('roomID') || randomID(5);
+  //     let myMeeting = async (element) => {
+  //    // generate Kit Token
+  //     const appID = 1119050860;
+  //     const serverSecret = "c6ed20e6310d6cfd250b41dcd93285bf";
+  //     const kitToken =  ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID,  randomID(5),  randomID(5));
 
     
-     // Create instance object from Kit Token.
-      const zp = ZegoUIKitPrebuilt.create(kitToken);
-      // start the call
-      zp.joinRoom({
-        container: element,
-        sharedLinks: [
-          {
-            name: 'Copy link',
-            url:
-             window.location.protocol + '//' + 
-             window.location.host + window.location.pathname +
-              '?roomID=' +
-              roomID,
-          },
-        ],
-        scenario: {
-          mode: ZegoUIKitPrebuilt.OneoNoneCall, // To implement 1-on-1 calls, modify the parameter here to [ZegoUIKitPrebuilt.OneONoneCall].
-        },
-      });
+  //    // Create instance object from Kit Token.
+  //     const zp = ZegoUIKitPrebuilt.create(kitToken);
+  //     // start the call
+  //     zp.joinRoom({
+  //       container: element,
+  //       sharedLinks: [
+  //         {
+  //           name: 'Copy link',
+  //           url:
+  //            window.location.protocol + '//' + 
+  //            window.location.host + window.location.pathname +
+  //             '?roomID=' +
+  //             roomID,
+  //         },
+  //       ],
+  //       scenario: {
+  //         mode: ZegoUIKitPrebuilt.OneoNoneCall, // To implement 1-on-1 calls, modify the parameter here to [ZegoUIKitPrebuilt.OneONoneCall].
+  //       },
+  //     });
 
     
-  };
+  // };
 
   useEffect(() => {
     window.googleTranslateElementInit = () => {
@@ -103,7 +106,11 @@ const App = () => {
         <Route path='/my-appointments' element={<MyAppointments/>}/>
         <Route path='/appointment/:docId' element={<Appointment/>}/>
         <Route path='/dashboard' element={<Dashboard/>}/>
-        <Route path='/allappointments' element={<AllAppointments/>}/>
+        <Route path='/sidebar' element={<Sidebar/>}/>
+        <Route path='/add-doctor' element={<AddDoctor/>}/>
+        <Route path='/all-appointments' element={<AllAppointments/>}/>
+        <Route path='/doctor-list' element={<DoctorList/>}/>
+
       </Routes>
       {/* <div
       className="myCallContainer"

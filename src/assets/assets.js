@@ -38,7 +38,12 @@ import Neurologist from './Neurologist.svg'
 import Pediatricians from './Pediatricians.svg'
 import userDefault from './userDefault.avif'
 import userDoc from './userDoc.webp'
-
+import profile from './profile.png'
+import profile2 from './profile2.png'
+import addicon from './addicon.png'
+import appointmenticon from './appointmenticon.png'
+import homeimg from './homeimg.png'
+import peopleicon from './peopleicon.png'
 
 export const assets = {
     appointment_img,
@@ -59,7 +64,13 @@ export const assets = {
     stripe_logo,
     razorpay_logo,
     userDefault,
-    userDoc
+    userDoc,
+    profile,
+    profile2,
+    addicon,
+    appointmenticon,
+    homeimg,
+    peopleicon
 }
 
 export const specialityData = [
