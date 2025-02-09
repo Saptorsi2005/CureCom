@@ -1,25 +1,22 @@
-import React, { useContext, useEffect, useState, useMemo } from "react";
+import React, { useContext, useEffect, useState, useMemo, lazy, Suspense } from "react";
 import { useParams } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
 import { assets } from "../assets/assets";
-import RelatedDoctors from "../components/RelatedDoctors";
 import { PopupButton } from "react-calendly";
 import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
-import DoctorProfile from "../components/DoctorProfile";
+
+// Lazy Loading Components for Better Performance
+const RelatedDoctors = lazy(() => import("../components/RelatedDoctors"));
+const DoctorProfile = lazy(() => import("../components/DoctorProfile"));
+const MiroBoard = lazy(() => import("../components/MiroBoard"));
 
 const Appointment = () => {
-  const [doctorId] = useState("doctor123"); // Example doctor ID
-  const [userId] = useState("user456"); // Example logged-in user ID
-
-
   const { docId } = useParams();
   const { doctors, currencySymbol } = useContext(AppContext);
 
-  const daysOfWeek = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-
   const [docInfo, setDocInfo] = useState(null);
-  const [slotIndex, setSlotIndex] = useState(0);
-  const [slotTime, setSlotTime] = useState("");
+  const [userId] = useState("user456"); // Example logged-in user ID
+  const [showMiroBoard, setShowMiroBoard] = useState(false); // Toggle Miro Board
 
   // Fetch doctor details
   useEffect(() => {
@@ -29,43 +26,19 @@ const Appointment = () => {
     }
   }, [doctors, docId]);
 
-  // Generate available slots
-  const docSlots = useMemo(() => {
-    if (!docInfo) return [];
-
-    const slots = [];
-    const today = new Date();
-
-    for (let i = 0; i < 7; i++) {
-      const currDate = new Date(today);
-      currDate.setDate(today.getDate() + i);
-      currDate.setHours(i === 0 ? Math.max(10, today.getHours() + 1) : 10, 0, 0, 0);
-
-      const endTime = new Date(currDate);
-      endTime.setHours(21, 0, 0, 0);
-
-      const timeSlots = [];
-      while (currDate < endTime) {
-        timeSlots.push({
-          datetime: new Date(currDate),
-          time: currDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }),
-        });
-        currDate.setMinutes(currDate.getMinutes() + 30);
-      }
-
-      slots.push(timeSlots);
-    }
-
-    return slots;
-  }, [docInfo]);
-
-  // Generate room ID
+  // Generate Room ID for Video Call
   const roomID = useMemo(() => getUrlParams().get("roomID") || randomID(5), []);
 
   function myMeeting(element) {
     const appID = 1119050860;
     const serverSecret = "c6ed20e6310d6cfd250b41dcd93285bf";
-    const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(appID, serverSecret, roomID, randomID(5), randomID(5));
+    const kitToken = ZegoUIKitPrebuilt.generateKitTokenForTest(
+      appID,
+      serverSecret,
+      roomID,
+      randomID(5),
+      randomID(5)
+    );
 
     const zp = ZegoUIKitPrebuilt.create(kitToken);
     zp.joinRoom({
@@ -77,7 +50,7 @@ const Appointment = () => {
         },
       ],
       scenario: {
-        mode: ZegoUIKitPrebuilt.OneoNoneCall,
+        mode: ZegoUIKitPrebuilt.OneONoneCall, // Fixed Typo
       },
     });
   }
@@ -85,9 +58,8 @@ const Appointment = () => {
   function randomID(len = 5) {
     let result = "";
     const chars = "12345qwertyuiopasdfgh67890jklmnbvcxzMNBVCZXASDQWERTYHGFUIOLKJP";
-    const maxPos = chars.length;
     for (let i = 0; i < len; i++) {
-      result += chars.charAt(Math.floor(Math.random() * maxPos));
+      result += chars.charAt(Math.floor(Math.random() * chars.length));
     }
     return result;
   }
@@ -101,7 +73,7 @@ const Appointment = () => {
     window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
   };
 
-  function handleClick() {
+  const handleVideoCall = () => {
     const container = document.createElement("div");
     container.className = "myCallContainer";
     container.style.width = "100vw";
@@ -109,7 +81,7 @@ const Appointment = () => {
     document.body.appendChild(container);
     myMeeting(container);
     scrollToBottom();
-  }
+  };
 
   return (
     docInfo && (
@@ -147,22 +119,41 @@ const Appointment = () => {
 
         {/* Video Call Button */}
         <div>
-          <button className="mt-6 px-14 py-3 rounded-full text-white bg-green-500 hover:bg-green-700" onClick={handleClick}
+          <button
+            className="mt-6 px-14 py-3 rounded-full text-white bg-green-500 hover:bg-green-700"
+            onClick={handleVideoCall}
           >
             Video Call
           </button>
         </div>
 
+        {/* Toggle Miro Board */}
         <div>
-          <div className="p-6">
-            <h1 className="text-2xl font-bold">Doctor Review System</h1>
-            <DoctorProfile doctorId={docId} userId={userId} />
-          </div>
+          <button
+            className="mt-6 px-14 py-3 rounded-full text-white bg-blue-500 hover:bg-blue-700"
+            onClick={() => setShowMiroBoard(!showMiroBoard)}
+          >
+            {showMiroBoard ? "Close Whiteboard" : "Open Whiteboard"}
+          </button>
+          {showMiroBoard && (
+            <Suspense fallback={<p>Loading Whiteboard...</p>}>
+              <MiroBoard />
+            </Suspense>
+          )}
+        </div>
 
+        {/* Doctor Profile */}
+        <div className="p-6">
+          <h1 className="text-2xl font-bold">Doctor Review System</h1>
+          <Suspense fallback={<p>Loading reviews...</p>}>
+            <DoctorProfile doctorId={docId} userId={userId} />
+          </Suspense>
         </div>
 
         {/* Related Doctors */}
-        <RelatedDoctors docId={docId} speciality={docInfo.speciality} />
+        <Suspense fallback={<p>Loading related doctors...</p>}>
+          <RelatedDoctors docId={docId} speciality={docInfo.speciality} />
+        </Suspense>
       </div>
     )
   );
