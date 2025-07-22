@@ -1,3 +1,5 @@
+import ZapierChatbot from './components/ZapierChatbot';
+
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
@@ -63,7 +65,8 @@ const App = () => {
         <Route path='/doctor-list' element={<DoctorList/>}/>
 
       </Routes>
-      
+      <ZapierChatbot />
+
       <Footer/>
     </div>
   )

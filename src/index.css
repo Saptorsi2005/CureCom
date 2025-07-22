@@ -1,4 +1,13 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+zapier-interfaces-chatbot-embed:not([chatbot-id="cmcaynxzh002k7zi6eyov9bob"]) {
+  display: none !important;
+}
+zapier-interfaces-chatbot-embed::part(status-indicator),
+zapier-interfaces-chatbot-embed::part(error-indicator) {
+  display: none !important;
+}
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
